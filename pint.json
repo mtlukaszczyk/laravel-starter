@@ -1,0 +1,14 @@
+{
+    "preset": "psr12",
+    "rules": {
+        "blank_line_after_opening_tag": false,
+        "new_with_braces": false,
+        "single_trait_insert_per_statement": false,
+        "class_definition": false,
+        "no_superfluous_phpdoc_tags": true,
+        "declare_strict_types": true,
+        "simplified_null_return": true,
+        "simplified_if_return": true,
+        "void_return": true
+    }
+}
