@@ -22,7 +22,7 @@ class SendMail implements ShouldQueue
 
     public bool $deleteWhenMissingModels = true;
 
-    private Mailer $mailer;
+    private Mailer $mailer|false = false;
 
     public function __construct(
         protected Mailable $mailable,
@@ -33,11 +33,14 @@ class SendMail implements ShouldQueue
         }
 
         $this->onQueue('default');
-        $this->mailer = app(Mailer::class);
     }
 
     public function handle(): void
     {
+        if (!$this->mailer) {
+            $this->mailer = app(Mailer::class);
+        }
+        
         try {
             event(new Created($this->mailable, $this->recipient));
             $this->mailer->to($this->recipient->getEmail())->send($this->mailable);
